@@ -1,4 +1,4 @@
-package io.king.authxml.auth
+package io.king.authxml.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

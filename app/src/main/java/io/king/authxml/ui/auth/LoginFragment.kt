@@ -1,4 +1,4 @@
-package io.king.authxml.auth
+package io.king.authxml.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
