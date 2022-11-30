@@ -12,12 +12,19 @@ class RemoteDataSource{
     }
 
     fun<API> buildApi(
-        api: Class<API>
+        api: Class<API>,
+        authToken: String? = null
     ) : API {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(
-                OkHttpClient.Builder().also { client ->
+                OkHttpClient.Builder()
+                    .addInterceptor{ chain ->
+                        chain.proceed(chain.request().newBuilder().also {
+                            it.addHeader("Authorization", "Bearer $authToken")
+                        }.build())
+                    }
+                    .also { client ->
                     if (BuildConfig.DEBUG){
                         val logging = HttpLoggingInterceptor();
                         logging.setLevel(HttpLoggingInterceptor.Level.BODY)

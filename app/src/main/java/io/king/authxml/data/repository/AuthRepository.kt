@@ -5,7 +5,7 @@ import io.king.authxml.data.network.AuthApi
 
 class AuthRepository(
     private val api: AuthApi,
-//    private val preferences: UserPreferences
+    private val preferences: UserPreferences
 )  : BaseRepository(){
 
     suspend fun login(
@@ -16,7 +16,7 @@ class AuthRepository(
     }
 
     suspend fun saveAuthToken(token: String){
-//        preferences.saveAccessTokens(token)
+        preferences.saveAccessTokens(token)
     }
 
 }
