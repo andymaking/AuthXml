@@ -30,17 +30,19 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         binding.loginButton.enable(false)
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.visible(false)
             when(it){
                 is Resource.Success -> {
-                    lifecycleScope.launch {
-                        userPreferences.saveAccessTokens(it.value.token)
+                    binding.progressBar.visible(false)
+                        viewModel.saveAuthToken(it.value.token)
                         Toast.makeText(requireContext(), it.value.message, Toast.LENGTH_LONG).show()
                         requireActivity().starttNewActivity(HomeActivity::class.java)
-                    }
                 }
                 is Resource.Failure -> {
+                    binding.progressBar.visible(false)
                     Toast.makeText(requireContext(), "Login failure", Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading ->{
+                    binding.progressBar.visible(true)
                 }
             }
         })
@@ -54,7 +56,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             val email = binding.loginUsername.text.toString().trim()
             val password = binding.loginPassword.text.toString().trim()
 
-            binding.progressBar.visible(true)
             viewModel.login(email, password)
         }
     }
@@ -66,6 +67,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         container: ViewGroup?
     ) = FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun getFragmentRepository()= AuthRepository(remoteDataSource.buildApi(AuthApi::class.java))
+    override fun getFragmentRepository()=
+        AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
 
 }

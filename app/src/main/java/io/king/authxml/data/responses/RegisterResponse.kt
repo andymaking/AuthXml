@@ -7,20 +7,20 @@ data class RegisterResponse(
 )
 
 data class DataX(
-    val patient: Patient,
+    val patient: _Patient,
     val token: String,
-    val user: User,
-    val wallet: Wallet
+    val user: _User,
+    val wallet: _Wallet
 )
 
-data class Wallet(
+data class _Wallet(
     val created_at: String,
     val id: Int,
     val updated_at: String,
     val user_id: Int
 )
 
-data class User(
+data class _User(
     val created_at: String,
     val email: String,
     val first_name: String,
@@ -31,7 +31,7 @@ data class User(
     val updated_at: String
 )
 
-data class Patient(
+data class _Patient(
     val card_id: String,
     val created_at: String,
     val id: Int,
