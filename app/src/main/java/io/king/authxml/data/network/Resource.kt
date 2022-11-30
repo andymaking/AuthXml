@@ -1,4 +1,4 @@
-package io.king.authxml.network
+package io.king.authxml.data.network
 import okhttp3.ResponseBody
 
 sealed class Resource<out  T> {
@@ -7,5 +7,5 @@ sealed class Resource<out  T> {
         val isNetworkError: Boolean,
         val errorCode: Int?,
         val errorBody: ResponseBody?
-    )
+    ): Resource<Nothing>()
 }

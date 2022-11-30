@@ -1,12 +1,12 @@
-package io.king.authxml.auth
+package io.king.authxml.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.king.authxml.R
 
-class AuthActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
+        setContentView(R.layout.activity_home)
     }
 }
