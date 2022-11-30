@@ -5,15 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import io.king.authxml.R
-class RegisterFragment : Fragment() {
+import io.king.authxml.databinding.FragmentLoginBinding
+import io.king.authxml.data.network.AuthApi
+import io.king.authxml.data.network.Resource
+import io.king.authxml.data.repository.AuthRepository
+import io.king.authxml.ui.base.BaseFragment
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+class RegisterFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+//        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+//            when(it){
+//                is Resource.Success -> {
+//                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+//                }
+//                is Resource.Failure -> {
+//                    Toast.makeText(requireContext(), "Login failure", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        })
+//
+//        binding.loginButton.setOnClickListener {
+//            val email = binding.loginUsername.text.toString().trim()
+//            val password = binding.loginPassword.text.toString().trim()
+//
+//            // @todo add validation
+//            viewModel.login(email, password)
+//        }
     }
+
+    override fun getViewModel() = AuthViewModel::class.java
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentLoginBinding.inflate(inflater, container, false)
+
+    override fun getFragmentRepository()= AuthRepository(remoteDataSource.buildApi(AuthApi::class.java))
 
 }

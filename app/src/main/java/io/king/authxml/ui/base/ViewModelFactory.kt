@@ -2,8 +2,8 @@ package io.king.authxml.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.king.authxml.repository.AuthRepository
-import io.king.authxml.repository.BaseRepository
+import io.king.authxml.data.repository.AuthRepository
+import io.king.authxml.data.repository.BaseRepository
 import io.king.authxml.ui.auth.AuthViewModel
 
 class ViewModelFactory (

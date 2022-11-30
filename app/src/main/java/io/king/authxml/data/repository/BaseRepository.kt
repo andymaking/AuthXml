@@ -1,6 +1,6 @@
-package io.king.authxml.repository
+package io.king.authxml.data.repository
 
-import io.king.authxml.network.Resource
+import io.king.authxml.data.network.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -8,7 +8,7 @@ import retrofit2.HttpException
 abstract class BaseRepository {
     suspend fun <T> safeApiCall(
         apiCall: suspend ()-> T
-    ) :  Resource<T>{
+    ) : Resource<T> {
         return withContext(Dispatchers.IO){
             try {
                 Resource.Success( apiCall.invoke())

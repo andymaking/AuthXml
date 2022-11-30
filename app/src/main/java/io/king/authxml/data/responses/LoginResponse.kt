@@ -1,6 +1,13 @@
-package io.king.authxml.responses
+package io.king.authxml.data.responses
 
-data class Data(
+data class LoginResponse(
+    val `data`: _Data,
+    val message: String,
+    val status: String,
+    val token: String
+)
+
+data class _Data(
     val created_at: String,
     val email: String,
     val email_verified_at: String,

@@ -1,4 +1,4 @@
-package io.king.authxml.network
+package io.king.authxml.data.network
 
 import io.king.authxml.BuildConfig
 import okhttp3.OkHttpClient
